@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Rincón del Poblado – Restaurante Medellín</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --dark: #1A1208;
+      --gold: #C8922A;
+      --gold-light: #E8B84B;
+      --green: #2D4A2D;
+      --text: #3A2E1E;
+      --muted: #8A7A66;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 4rem;
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,146,42,0.15);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--dark);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: #fff;
+      padding: 0.6rem 1.4rem; border-radius: 2px;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--dark); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem 4rem 6rem;
+      position: relative;
+    }
+    .hero-tag {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 2rem; height: 1px; background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.1; color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-desc {
+      font-size: 1rem; line-height: 1.8; color: var(--muted);
+      max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--dark); color: var(--cream);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-outline {
+      border: 1.5px solid var(--dark); color: var(--dark);
+      padding: 0.9rem 2rem; border-radius: 2px;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--dark); color: var(--cream); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--dark); display: block;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--green);
+    }
+    .hero-img-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(200,146,42,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(45,74,45,0.8) 0%, transparent 50%),
+        linear-gradient(135deg, #2D4A2D 0%, #1A2E1A 100%);
+    }
+    .hero-img-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 3rem;
+    }
+    .hero-img-text .big-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      color: rgba(245,240,232,0.08);
+      line-height: 1; letter-spacing: -0.02em;
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+    .dish-card {
+      position: relative; z-index: 2;
+      background: rgba(245,240,232,0.08);
+      border: 1px solid rgba(200,146,42,0.3);
+      border-radius: 4px; padding: 2rem;
+      backdrop-filter: blur(8px);
+      text-align: left; color: var(--cream);
+      max-width: 320px;
+    }
+    .dish-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .dish-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; margin-bottom: 0.5rem;
+    }
+    .dish-desc { font-size: 0.85rem; opacity: 0.7; line-height: 1.6; margin-bottom: 1rem; }
+    .dish-price { color: var(--gold-light); font-size: 1.1rem; font-weight: 500; }
+
+    /* ABOUT */
+    .about {
+      padding: 8rem 6rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      align-items: center;
+    }
+    .section-tag {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 1.2; color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-text { font-size: 0.95rem; line-height: 1.9; color: var(--muted); margin-bottom: 1rem; }
+    .about-img {
+      background: var(--green);
+      border-radius: 4px; height: 480px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .about-img-inner {
+      background: radial-gradient(ellipse at center, rgba(200,146,42,0.2), transparent 70%);
+      position: absolute; inset: 0;
+    }
+    .about-img-text {
+      position: relative; z-index: 2; text-align: center; color: var(--cream);
+      padding: 2rem;
+    }
+    .about-img-text span {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; opacity: 0.15;
+    }
+    .about-img-text p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-style: italic; opacity: 0.7;
+    }
+
+    /* MENU */
+    .menu { padding: 8rem 6rem; background: var(--dark); }
+    .menu-header { text-align: center; margin-bottom: 4rem; }
+    .menu-header .section-tag { color: var(--gold); }
+    .menu-header .section-title { color: var(--cream); }
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .menu-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,146,42,0.15);
+      border-radius: 4px; padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .menu-item:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .menu-item-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .menu-item-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--cream);
+    }
+    .menu-item-price { color: var(--gold-light); font-weight: 500; font-size: 0.95rem; }
+    .menu-item-desc { font-size: 0.82rem; color: rgba(245,240,232,0.5); line-height: 1.6; }
+    .menu-item-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 99px;
+      border: 1px solid rgba(200,146,42,0.3); color: var(--gold);
+    }
+
+    /* RESERVATIONS */
+    .reservations { padding: 8rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.85rem 1rem;
+      background: transparent; border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--text);
+      transition: border-color 0.2s; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-submit {
+      width: 100%; padding: 1rem;
+      background: var(--gold); color: #fff; border: none;
+      border-radius: 2px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--dark); }
+    .contact-info { margin-top: 3rem; }
+    .contact-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
+    .contact-icon { font-size: 1.2rem; margin-top: 2px; }
+    .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 2px; }
+    .contact-value { font-size: 0.95rem; color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); color: rgba(245,240,232,0.5);
+      padding: 3rem 6rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(200,146,42,0.15);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--cream);
+    }
+    .footer-text { font-size: 0.8rem; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: rgba(245,240,232,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-tag { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero-title { animation: fadeUp 0.6s ease 0.2s both; }
+    .hero-desc { animation: fadeUp 0.6s ease 0.3s both; }
+    .hero-btns { animation: fadeUp 0.6s ease 0.4s both; }
+    .hero-stats { animation: fadeUp 0.6s ease 0.5s both; }
+    .dish-card { animation: fadeUp 0.8s ease 0.4s both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 300px; }
+      .hero-left { padding: 5rem 1.5rem 2rem; }
+      .about, .reservations { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .menu { padding: 4rem 1.5rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">El Rincón del Poblado</div>
+    <ul class="nav-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#reservas">Reservas</a></li>
+    </ul>
+    <a href="#reservas" class="nav-cta">Reservar mesa</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Desde 2018 · El Poblado, Medellín</div>
+      <h1 class="hero-title">
+        Sabores que<br><em>cuentan</em><br>historias
+      </h1>
+      <p class="hero-desc">
+        Cocina colombiana contemporánea en el corazón de El Poblado. Ingredientes locales, recetas de familia y una experiencia que no olvidarás.
+      </p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-primary">Ver menú</a>
+        <a href="#reservas" class="btn-outline">Reservar mesa</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">6+</span>
+          <span class="stat-label">Años de historia</span>
+        </div>
+        <div>
+          <span class="stat-num">40+</span>
+          <span class="stat-label">Platos únicos</span>
+        </div>
+        <div>
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Calificación</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-bg"></div>
+      <div class="hero-img-text">
+        <div class="big-text">Sabor</div>
+        <div class="dish-card">
+          <span class="dish-emoji">🍲</span>
+          <div class="dish-name">Bandeja Paisa Premium</div>
+          <div class="dish-desc">Frijoles cargamanto, chicharrón, chorizo artesanal, aguacate y arroz blanco. El alma de Antioquia en un plato.</div>
+          <div class="dish-price">$45.000 COP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about-img">
+      <div class="about-img-inner"></div>
+      <div class="about-img-text">
+        <span>🌿</span>
+        <p>"La cocina es memoria,<br>identidad y amor."</p>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag">Nuestra historia</div>
+      <h2 class="section-title">Tradición <em>antioqueña</em> con alma moderna</h2>
+      <p class="section-text">
+        Nacimos en 2018 con una misión clara: rescatar los sabores auténticos de la cocina paisa y presentarlos con una mirada contemporánea, sin perder ni una gota de alma.
+      </p>
+      <p class="section-text">
+        Trabajamos directamente con agricultores de la región, seleccionando ingredientes frescos cada mañana. Cada plato es una conversación entre el pasado y el presente de nuestra gastronomía.
+      </p>
+      <p class="section-text">
+        Ubicados en el corazón de El Poblado, somos el lugar donde las familias se reúnen, los amigos celebran y los visitantes descubren el verdadero sabor de Medellín.
+      </p>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu-header">
+      <div class="section-tag">Lo mejor de nuestra cocina</div>
+      <h2 class="section-title">Nuestro menú</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Bandeja Paisa Premium</div>
+          <div class="menu-item-price">$45.000</div>
+        </div>
+        <div class="menu-item-desc">Frijoles, chicharrón, chorizo, carne molida, huevo, arroz, aguacate y arepa.</div>
+        <span class="menu-item-tag">Clásico</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Sancocho Trifásico</div>
+          <div class="menu-item-price">$38.000</div>
+        </div>
+        <div class="menu-item-desc">Res, cerdo y pollo en caldo de verduras, papa criolla y yuca. Para el alma.</div>
+        <span class="menu-item-tag">Tradicional</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Trucha a la Parrilla</div>
+          <div class="menu-item-price">$42.000</div>
+        </div>
+        <div class="menu-item-desc">Trucha del oriente antioqueño, patacones, ensalada fresca y limón mandarina.</div>
+        <span class="menu-item-tag">Chef's pick</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Ajiaco Bogotano</div>
+          <div class="menu-item-price">$35.000</div>
+        </div>
+        <div class="menu-item-desc">Tres tipos de papa, pollo desmechado, guasca fresca y crema de leche.</div>
+        <span class="menu-item-tag">Favorito</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Costilla BBQ Criolla</div>
+          <div class="menu-item-price">$52.000</div>
+        </div>
+        <div class="menu-item-desc">Costilla de res marinada 24h, salsa BBQ con guayaba y yuca frita artesanal.</div>
+        <span class="menu-item-tag">Premium</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Postre Tres Leches</div>
+          <div class="menu-item-price">$18.000</div>
+        </div>
+        <div class="menu-item-desc">Bizcocho esponjoso bañado en tres leches, crema chantilly y canela.</div>
+        <span class="menu-item-tag">Postre</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATIONS -->
+  <section class="reservations" id="reservas">
+    <div>
+      <div class="section-tag">¿Listo para visitarnos?</div>
+      <h2 class="section-title">Reserva tu <em>mesa</em></h2>
+      <p class="section-text">Garantiza tu lugar y disfruta de una experiencia gastronómica que no olvidarás. Reservas disponibles de martes a domingo.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Dirección</div>
+            <div class="contact-value">Calle 10 #43E-31, El Poblado, Medellín</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Teléfono</div>
+            <div class="contact-value">+57 (4) 312 456 7890</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Horario</div>
+            <div class="contact-value">Mar–Dom: 12:00 pm – 10:00 pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre"/>
+        </div>
+        <div class="form-group">
+          <label>Apellido</label>
+          <input type="text" placeholder="Tu apellido"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@ejemplo.com"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date"/>
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <select>
+            <option>12:00 pm</option>
+            <option>1:00 pm</option>
+            <option>2:00 pm</option>
+            <option>7:00 pm</option>
+            <option>8:00 pm</option>
+            <option>9:00 pm</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Número de personas</label>
+        <select>
+          <option>1 persona</option>
+          <option>2 personas</option>
+          <option>3–4 personas</option>
+          <option>5–6 personas</option>
+          <option>Más de 6</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje especial (opcional)</label>
+        <textarea rows="3" placeholder="Cumpleaños, aniversario, alergias..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('¡Reserva enviada! Te contactaremos pronto.')">Confirmar reserva</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">El Rincón del Poblado</div>
+    <div class="footer-text">© 2024 El Rincón del Poblado · Medellín, Colombia</div>
+    <ul class="footer-links">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#reservas">Reservas</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
